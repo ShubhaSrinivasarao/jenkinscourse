@@ -1,0 +1,54 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySalestypeAmountLabel" data-translate="salesMaintenanceApp.salestypeAmount.home.createOrEditLabel">Create or edit a Salestype Amount</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.salestypeAmount.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.salestypeAmount.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="salesMaintenanceApp.salestypeAmount.salesTypeId" for="field_salesTypeId">Sales Type Id</label>
+            <input type="number" class="form-control" name="salesTypeId" id="field_salesTypeId"
+                    ng-model="vm.salestypeAmount.salesTypeId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="salesMaintenanceApp.salestypeAmount.totalAmount" for="field_totalAmount">Total Amount</label>
+            <input type="number" class="form-control" name="totalAmount" id="field_totalAmount"
+                    ng-model="vm.salestypeAmount.totalAmount"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="salesMaintenanceApp.salestypeAmount.saleDate" for="field_saleDate">Sale Date</label>
+                <div class="input-group">
+                    <input id="field_saleDate" type="text" class="form-control" name="saleDate" uib-datepicker-popup="{{dateformat}}" ng-model="vm.salestypeAmount.saleDate" is-open="vm.datePickerOpenStatus.saleDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('saleDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="salesMaintenanceApp.salestypeAmount.salestypeBill" for="field_salestypeBill">Salestype Bill</label>
+            <select class="form-control" id="field_salestypeBill" name="salestypeBill" ng-model="vm.salestypeAmount.salestypeBill" ng-options="salestypeBill as salestypeBill.id for salestypeBill in vm.salestypebills track by salestypeBill.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

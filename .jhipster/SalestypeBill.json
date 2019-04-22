@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "salestypeAmount",
+            "otherEntityName": "salestypeAmount",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "salestypeBill"
+        },
+        {
+            "relationshipName": "salestypeBillDetl",
+            "otherEntityName": "salestypeBillDetl",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "salestypeBill"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "billNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "allotedAmount",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20170214100539",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "salestype_bill",
+    "pagination": "no"
+}

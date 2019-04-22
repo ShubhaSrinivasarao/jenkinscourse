@@ -1,0 +1,26 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "salestypeBill",
+            "otherEntityName": "salestypeBill",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "returnDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "returnAmount",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20170214100718",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "salestype_bill_detl",
+    "pagination": "pager"
+}

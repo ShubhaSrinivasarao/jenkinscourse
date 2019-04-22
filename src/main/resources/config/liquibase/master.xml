@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170214100539_added_entity_SalestypeBill.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170214100718_added_entity_SalestypeBillDetl.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170214100921_added_entity_SalestypeAmount.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170214100718_added_entity_constraints_SalestypeBillDetl.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170214100921_added_entity_constraints_SalestypeAmount.xml" relativeToChangelogFile="false"/>
+</databaseChangeLog>

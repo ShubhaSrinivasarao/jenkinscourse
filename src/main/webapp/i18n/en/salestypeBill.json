@@ -1,0 +1,25 @@
+{
+    "salesMaintenanceApp": {
+        "salestypeBill" : {
+            "home": {
+                "title": "Salestype Bills",
+                "createLabel": "Create a new Salestype Bill",
+                "createOrEditLabel": "Create or edit a Salestype Bill",
+                "search": "Search for Salestype Bill"
+            },
+            "created": "A new Salestype Bill is created with identifier {{ param }}",
+            "updated": "A Salestype Bill is updated with identifier {{ param }}",
+            "deleted": "A Salestype Bill is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Salestype Bill {{ id }}?"
+            },
+            "detail": {
+                "title": "Salestype Bill"
+            },
+            "billNo": "Bill No",
+            "allotedAmount": "Alloted Amount",
+            "salestypeAmount": "Salestype Amount",
+            "salestypeBillDetl": "Salestype Bill Detl"
+        }
+    }
+}

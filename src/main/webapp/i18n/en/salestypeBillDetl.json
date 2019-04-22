@@ -1,0 +1,24 @@
+{
+    "salesMaintenanceApp": {
+        "salestypeBillDetl" : {
+            "home": {
+                "title": "Salestype Bill Detls",
+                "createLabel": "Create a new Salestype Bill Detl",
+                "createOrEditLabel": "Create or edit a Salestype Bill Detl",
+                "search": "Search for Salestype Bill Detl"
+            },
+            "created": "A new Salestype Bill Detl is created with identifier {{ param }}",
+            "updated": "A Salestype Bill Detl is updated with identifier {{ param }}",
+            "deleted": "A Salestype Bill Detl is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Salestype Bill Detl {{ id }}?"
+            },
+            "detail": {
+                "title": "Salestype Bill Detl"
+            },
+            "returnDesc": "Return Desc",
+            "returnAmount": "Return Amount",
+            "salestypeBill": "Salestype Bill"
+        }
+    }
+}

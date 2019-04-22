@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns='http://www.ehcache.org/v3'
+         xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+
+    <cache-template name="simple">
+        <expiry>
+            <ttl unit="seconds">3600</ttl>
+        </expiry>
+        <heap>100</heap>
+    </cache-template>
+
+    <cache alias="com.sales.domain.User" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.Authority" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.User.authorities" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.PersistentToken" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.User.persistentTokens" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.SalestypeBill" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.SalestypeBillDetl" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.SalestypeAmount" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.SalestypeBill.billDetails" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.SalestypeAmount.billAmounts" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.SalestypeBill.salestypeAmounts" uses-template="simple"/>
+
+    <cache alias="com.sales.domain.SalestypeBill.salestypeBillDetls" uses-template="simple"/>
+
+    <!-- jhipster-needle-ehcache-add-entry -->
+</config>

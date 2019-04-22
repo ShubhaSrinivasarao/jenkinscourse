@@ -1,0 +1,64 @@
+<div>
+    <h2 data-translate="salesMaintenanceApp.salestypeAmount.home.title">Salestype Amounts</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="salestype-amount.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="salesMaintenanceApp.salestypeAmount.home.createLabel">
+                        Create new Salestype Amount
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="salesMaintenanceApp.salestypeAmount.salesTypeId">Sales Type Id</span></th>
+                    <th><span data-translate="salesMaintenanceApp.salestypeAmount.totalAmount">Total Amount</span></th>
+                    <th><span data-translate="salesMaintenanceApp.salestypeAmount.saleDate">Sale Date</span></th>
+                    <th><span data-translate="salesMaintenanceApp.salestypeAmount.salestypeBill">Salestype Bill</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="salestypeAmount in vm.salestypeAmounts track by salestypeAmount.id">
+                    <td><a ui-sref="salestype-amount-detail({id:salestypeAmount.id})">{{salestypeAmount.id}}</a></td>
+                    <td>{{salestypeAmount.salesTypeId}}</td>
+                    <td>{{salestypeAmount.totalAmount}}</td>
+                        <td>{{salestypeAmount.saleDate | date:'mediumDate'}}</td>
+                    <td>
+                        <a ui-sref="salestype-bill-detail({id:salestypeAmount.salestypeBill.id})">{{salestypeAmount.salestypeBill.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="salestype-amount-detail({id:salestypeAmount.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="salestype-amount.edit({id:salestypeAmount.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="salestype-amount.delete({id:salestypeAmount.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{
+    "salesMaintenanceApp": {
+        "salestypeAmount" : {
+            "home": {
+                "title": "Salestype Amounts",
+                "createLabel": "Create a new Salestype Amount",
+                "createOrEditLabel": "Create or edit a Salestype Amount",
+                "search": "Search for Salestype Amount"
+            },
+            "created": "A new Salestype Amount is created with identifier {{ param }}",
+            "updated": "A Salestype Amount is updated with identifier {{ param }}",
+            "deleted": "A Salestype Amount is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Salestype Amount {{ id }}?"
+            },
+            "detail": {
+                "title": "Salestype Amount"
+            },
+            "salesTypeId": "Sales Type Id",
+            "totalAmount": "Total Amount",
+            "saleDate": "Sale Date",
+            "salestypeBill": "Salestype Bill"
+        }
+    }
+}

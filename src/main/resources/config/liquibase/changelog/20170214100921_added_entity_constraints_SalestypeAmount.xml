@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity SalestypeAmount.
+    -->
+    <changeSet id="20170214100921-2" author="jhipster">
+        
+        <addColumn tableName="salestype_amount">
+            <column name="salestype_bill_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        
+        <addForeignKeyConstraint baseColumnNames="salestype_bill_id"
+                                 baseTableName="salestype_amount"
+                                 constraintName="fk_salestype_amount_salestype_bill_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="salestype_bill"/>
+
+    </changeSet>
+</databaseChangeLog>

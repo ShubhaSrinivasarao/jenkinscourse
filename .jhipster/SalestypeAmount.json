@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "salestypeBill",
+            "otherEntityName": "salestypeBill",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "salesTypeId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "totalAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "saleDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20170214100921",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "salestype_amount",
+    "pagination": "no"
+}
