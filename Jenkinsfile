@@ -1,6 +1,8 @@
 node {
+	def mvnHome
     stage('checkout') {
         checkout scm
+		mvnHome = tool 'apache-maven-3.3.9'
     }
 
     // uncomment these 2 lines and edit the name 'node-4.6.0' according to what you choose in configuration
@@ -8,18 +10,33 @@ node {
     // env.PATH = "${nodeHome}/bin:${env.PATH}"
 
     stage('check tools') {
-        sh "node -v"
-        sh "npm -v"
-        sh "bower -v"
-        sh "gulp -v"
+        if (isUnix()) {
+			sh "node -v"
+			sh "npm -v"
+			sh "bower -v"
+			sh "gulp -v"
+		} else {
+			bat label: '', script: 'node -v'
+			bat label: '', script: 'npm -v'
+			bat label: '', script: 'bower -v'
+			bat label: '', script: 'gulp -v'
+		}
     }
 
     stage('npm install') {
-        sh "npm install"
+		if (isUnix()) {
+			sh "npm install"
+		} else {
+			bat label: '', script: 'npm install'
+		}
     }
 
     stage('clean') {
-        sh "./mvnw clean"
+		if (isUnix()) {
+			sh "./mvnw clean"
+		} else {
+			bat label: '', script: './mvnw clean'
+		}
     }
 
     stage('backend tests') {
@@ -43,6 +60,10 @@ node {
     }
 
     stage('packaging') {
-        sh "./mvnw package -Pprod -DskipTests"
+		if (isUnix()) {
+			sh "./mvnw package -Pprod -DskipTests"
+		} else {
+			bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+		}
     }
 }
