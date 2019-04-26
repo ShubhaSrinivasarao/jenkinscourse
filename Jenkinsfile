@@ -7,7 +7,7 @@ node {
 
     // uncomment these 2 lines and edit the name 'node-4.5.0' according to what you choose in configuration
      def nodeHome = tool name: 'node-4.5.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-     env.PATH = "${nodeHome}/bin;${env.PATH}"
+     env.PATH = "C:/Users/M1024688/AppData/Roaming/npm;${nodeHome};${env.PATH}"
 	echo "${env.PATH}"
     stage('check tools') {
         if (isUnix()) {
