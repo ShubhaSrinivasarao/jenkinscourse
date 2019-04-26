@@ -55,7 +55,11 @@ node {
 
     stage('frontend tests') {
         try {
-            sh "gulp test"
+			if (isUnix()) {
+				sh "gulp test"
+			}else {
+				bat label: '', script: 'gulp test'
+			}
         } catch(err) {
             throw err
         } finally {
