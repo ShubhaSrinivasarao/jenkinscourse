@@ -53,19 +53,19 @@ node {
         }
     }
 
-    stage('frontend tests') {
-        try {
-			if (isUnix()) {
-				sh "gulp test"
-			}else {
-				bat label: '', script: 'gulp test'
-			}
-        } catch(err) {
-            throw err
-        } finally {
-            step([$class: 'JUnitResultArchiver', testResults: '**/target/test-results/karma/TESTS-*.xml'])
-        }
-    }
+   // stage('frontend tests') {
+   //     try {
+	//		if (isUnix()) {
+	//			sh "gulp test"
+	//		}else {
+	//			bat label: '', script: 'gulp test'
+	//		}
+   //     } catch(err) {
+   //         throw err
+    //    } finally {
+    //        step([$class: 'JUnitResultArchiver', testResults: '**/target/test-results/karma/TESTS-*.xml'])
+    //    }
+  //  }
 
     stage('packaging') {
 		if (isUnix()) {
