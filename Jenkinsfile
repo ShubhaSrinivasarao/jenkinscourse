@@ -66,7 +66,20 @@ node {
     //        step([$class: 'JUnitResultArchiver', testResults: '**/target/test-results/karma/TESTS-*.xml'])
     //    }
   //  }
+  
+	  stage('SonarQube analysis') {
+		// requires SonarQube Scanner 2.8+
+		def scannerHome = tool 'sonar';
+		withSonarQubeEnv('sonar') {
+			if (isUnix()) {
+				sh script: "${scannerHome}/bin/sonar-scanner"
+			} else {
+				bat script: "${scannerHome}/bin/sonar-scanner"
+			}
+		}
+	  }
 
+	 //Package creating
     stage('packaging') {
 		if (isUnix()) {
 			sh "./mvnw package -Pprod -DskipTests"
