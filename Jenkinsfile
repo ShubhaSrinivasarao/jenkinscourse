@@ -74,7 +74,8 @@ node {
 			if (isUnix()) {
 				sh script: "${scannerHome}/bin/sonar-scanner"
 			} else {
-				bat script: "${scannerHome}/bin/sonar-scanner"
+				//bat script: "${scannerHome}/bin/sonar-scanner"
+				bat script: "${mvnHome}/bin/mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar"				
 			}
 		}
 	  }
@@ -84,7 +85,8 @@ node {
 		if (isUnix()) {
 			sh "./mvnw package -Pprod -DskipTests"
 		} else {
-			bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+			// bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+			bat script: "./mvnw package -Pprod -DskipTests"
 		}
     }
 }
