@@ -112,7 +112,7 @@ node {
 			def server = Artifactory.server 'Artifactory-local'
 			
 			def rtMaven = Artifactory.newMavenBuild()
-			
+
 			rtMavenResolver server: server, releaseRepo: 'maven-release', snapshotRepo: 'maven-virtual'
 			
 			rtMavenDeployer server: server, releaseRepo: 'maven-release-local', snapshotRepo: 'maven-local'
@@ -160,7 +160,7 @@ node {
 	//			serverId: "Artifactory-local"
 	//		)
 	//	}
-	//}
+	//} 
 	
 }
 
