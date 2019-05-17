@@ -82,21 +82,21 @@ node {
 		}
 	  }
 	  
-	  //stage("Quality Gate") {
-		//steps {
-	//		timeout(time: 1, unit: 'HOURS') {
+	  stage("Quality Gate") {
+		withSonarQubeEnv('sonar') {
+			timeout(time: 1, unit: 'HOURS') {
 				// Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
 				// true = set pipeline to UNSTABLE, false = don't
 				// Requires SonarQube Scanner for Jenkins 2.7+
 				//waitForQualityGate abortPipeline: true
 				
-	//			def qg = waitForQualityGate() 
-	//			if (qg.status != 'OK') {
-	//				error "Pipeline aborted due to quality gate failure: ${qg.status}"
-	//			}
-	//		}
-	//	}
-	//}
+				def qg = waitForQualityGate() 
+				if (qg.status != 'OK') {
+					error "Pipeline aborted due to quality gate failure: ${qg.status}"
+				}
+			}
+		}
+	}
 	
 	 //Package creating
     stage('packaging') {
@@ -109,22 +109,22 @@ node {
     }
 	
 	stage ('Artifactory configuration') {
-		steps {
-			rtMavenResolver id: "MAVEN_RESOLVER", serverId: 'Artifactory-local', releaseRepo: 'maven-release', snapshotRepo: 'maven-virtual'
 		
-			rtMavenDeployer id: "MAVEN_DEPLOYER",serverId: 'Artifactory-local', releaseRepo: 'maven-release-local', snapshotRepo: 'maven-local'
+		rtMavenResolver id: "MAVEN_RESOLVER", serverId: 'Artifactory-local', releaseRepo: 'maven-release', snapshotRepo: 'maven-virtual'
+	
+		rtMavenDeployer id: "MAVEN_DEPLOYER",serverId: 'Artifactory-local', releaseRepo: 'maven-release-local', snapshotRepo: 'maven-local'
 
-			rtMavenRun (
-				tool: 'apache-maven-3.3.9', // Tool name from Jenkins configuration
-				pom: 'pom.xml',
-				goals: 'clean install',
-				deployerId: "MAVEN_DEPLOYER",
-				resolverId: "MAVEN_RESOLVER"
-			)
-			rtPublishBuildInfo (
-				serverId: "Artifactory-local"
-			)			
-		}
+		rtMavenRun (
+			tool: 'apache-maven-3.3.9', // Tool name from Jenkins configuration
+			pom: 'pom.xml',
+			goals: 'clean install',
+			deployerId: "MAVEN_DEPLOYER",
+			resolverId: "MAVEN_RESOLVER"
+		)
+		rtPublishBuildInfo (
+			serverId: "Artifactory-local"
+		)			
+		
 	}
 }
 
