@@ -113,13 +113,21 @@ node {
 			
 			def rtMaven = Artifactory.newMavenBuild()
 
-			rtMavenResolver server: server, releaseRepo: 'maven-release', snapshotRepo: 'maven-virtual'
+			rtMavenResolver id: "MAVEN_RESOLVER", server: server, releaseRepo: 'maven-release', snapshotRepo: 'maven-virtual'
 			
-			rtMavenDeployer server: server, releaseRepo: 'maven-release-local', snapshotRepo: 'maven-local'
+			rtMavenDeployer id: "MAVEN_DEPLOYER",server: server, releaseRepo: 'maven-release-local', snapshotRepo: 'maven-local'
 			
-			def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install'
+			rtMavenRun (
+				tool: 'apache-maven-3.3.9', // Tool name from Jenkins configuration
+				pom: 'pom.xml',
+				goals: 'clean install',
+				deployerId: "MAVEN_DEPLOYER",
+				resolverId: "MAVEN_RESOLVER"
+			)
 
-			server.publishBuildInfo buildInfo
+			rtPublishBuildInfo (
+				serverId: "Artifactory-local"
+			)
 			
 			//rtServer (
 			//	id: "Artifactory-local",
