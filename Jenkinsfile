@@ -47,10 +47,10 @@ node {
 				bat label: '', script: './mvnw test'
 			}
         } catch(err) {
+			notify("Failed")
             throw err
         } finally {
             step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
-			notify("Failed")
         }
     }
 
