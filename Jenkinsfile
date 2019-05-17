@@ -109,45 +109,69 @@ node {
 	
 	stage ('Artifactory configuration') {
 		steps {
+			def server = Artifactory.server 'Artifactory-local'
+			
+			def rtMaven = Artifactory.newMavenBuild()
+			
+			rtMavenResolver server: server, releaseRepo: 'maven-release', snapshotRepo: 'maven-virtual'
+			
+			rtMavenDeployer server: server, releaseRepo: 'maven-release-local', snapshotRepo: 'maven-local'
+			
+			def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install'
+
+			server.publishBuildInfo buildInfo
+			
 			//rtServer (
 			//	id: "Artifactory-local",
 			//	url: SERVER_URL,
 			////	credentialsId: CREDENTIALS
 			//)
 
-			rtMavenDeployer (
-				id: "MAVEN_DEPLOYER",
-				serverId: "Artifactory-local",
-				releaseRepo: "maven-release-local",
-				snapshotRepo: "maven-local-local"
-			)
+			//rtMavenDeployer (
+			//	id: "MAVEN_DEPLOYER",
+			//	serverId: "Artifactory-local",
+			//	releaseRepo: "maven-release-local",
+			//	snapshotRepo: "maven-local-local"
+			//)
 
-			rtMavenResolver (
-				id: "MAVEN_RESOLVER",
-				serverId: "Artifactory-local",
-				releaseRepo: "maven-release",
-				snapshotRepo: "maven-virtual"
-			)
+		//	rtMavenResolver (
+			//	id: "MAVEN_RESOLVER",
+			//	serverId: "Artifactory-local",
+			//	releaseRepo: "maven-release",
+			//	snapshotRepo: "maven-virtual"
+		//	)
 		}
 	}
 	
-	stage ('Exec Maven') {
-		steps {
-			rtMavenRun (
-				tool: 'apache-maven-3.3.9', // Tool name from Jenkins configuration
-				pom: 'pom.xml',
-				goals: 'clean install',
-				deployerId: "MAVEN_DEPLOYER",
-				resolverId: "MAVEN_RESOLVER"
-			)
-		}
-	}
-	stage ('Publish build info') {
-		steps {
-			rtPublishBuildInfo (
-				serverId: "Artifactory-local"
-			)
-		}
-	}
+	//stage ('Exec Maven') {
+	//	steps {
+	//		rtMavenRun (
+	//			tool: 'apache-maven-3.3.9', // Tool name from Jenkins configuration
+	//			pom: 'pom.xml',
+	//			goals: 'clean install',
+	//			deployerId: "MAVEN_DEPLOYER",
+	//			resolverId: "MAVEN_RESOLVER"
+	//		)
+	//	}
+	//}
+	//stage ('Publish build info') {
+	//	steps {
+	//		rtPublishBuildInfo (
+	//			serverId: "Artifactory-local"
+	//		)
+	//	}
+	//}
 	
+}
+
+//Mail notification
+def notify(status) {
+   wrap([$class: 'BuildUser']) {
+       emailext (
+       subject: "${status}: Job ${env.JOB_NAME} ([${env.BUILD_NUMBER})",
+       body: """
+       Check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME} (${env.BUILD_NUMBER})</a>""",
+       to: "${BUILD_USER_EMAIL}",
+       from: 'jenkins@company.com')
+   }
 }
