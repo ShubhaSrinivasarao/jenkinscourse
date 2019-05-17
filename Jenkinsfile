@@ -81,21 +81,21 @@ node {
 		}
 	  }
 	  
-	  stage("Quality Gate") {
-		steps {
-			timeout(time: 1, unit: 'HOURS') {
+	  //stage("Quality Gate") {
+		//steps {
+	//		timeout(time: 1, unit: 'HOURS') {
 				// Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
 				// true = set pipeline to UNSTABLE, false = don't
 				// Requires SonarQube Scanner for Jenkins 2.7+
 				//waitForQualityGate abortPipeline: true
 				
-				def qg = waitForQualityGate() 
-				if (qg.status != 'OK') {
-					error "Pipeline aborted due to quality gate failure: ${qg.status}"
-				}
-			}
-		}
-	}
+	//			def qg = waitForQualityGate() 
+	//			if (qg.status != 'OK') {
+	//				error "Pipeline aborted due to quality gate failure: ${qg.status}"
+	//			}
+	//		}
+	//	}
+	//}
 	
 	 //Package creating
     stage('packaging') {
