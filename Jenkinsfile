@@ -84,7 +84,7 @@ node {
 	  
 	  stage("Quality Gate") {
 		withSonarQubeEnv('sonar') {
-			timeout(time: 1, unit: 'HOURS') {
+			//timeout(time: 5, unit: 'SECONDS') {
 				// Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
 				// true = set pipeline to UNSTABLE, false = don't
 				// Requires SonarQube Scanner for Jenkins 2.7+
@@ -94,7 +94,7 @@ node {
 				if (qg.status != 'OK') {
 					error "Pipeline aborted due to quality gate failure: ${qg.status}"
 				}
-			}
+			//} 
 		}
 	}
 	
