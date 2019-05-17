@@ -109,45 +109,59 @@ node {
 	
 	stage ('Artifactory configuration') {
 		steps {
+			def server = Artifactory.server 'Artifactory-local'
+			
+			def rtMaven = Artifactory.newMavenBuild()
+			
+			rtMaven.resolver server: server, releaseRepo: 'maven-release', snapshotRepo: 'maven-virtual'
+			
+			rtMaven.deployer server: server, releaseRepo: 'maven-release-local', snapshotRepo: 'maven-local'
+			
+			def buildInfo = rtMaven.run pom: 'maven-example/pom.xml', goals: 'clean install'
+			
+			rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: existingBuildInfo
+
+			server.publishBuildInfo buildInfo
+			
 			//rtServer (
 			//	id: "Artifactory-local",
 			//	url: SERVER_URL,
 			////	credentialsId: CREDENTIALS
 			//)
 
-			rtMavenDeployer (
-				id: "MAVEN_DEPLOYER",
-				serverId: "Artifactory-local",
-				releaseRepo: "maven-release-local",
-				snapshotRepo: "maven-local-local"
-			)
+			//rtMavenDeployer (
+			//	id: "MAVEN_DEPLOYER",
+			//	serverId: "Artifactory-local",
+			//	releaseRepo: "maven-release-local",
+			//	snapshotRepo: "maven-local-local"
+			//)
 
-			rtMavenResolver (
-				id: "MAVEN_RESOLVER",
-				serverId: "Artifactory-local",
-				releaseRepo: "maven-release",
-				snapshotRepo: "maven-virtual"
-			)
+		//	rtMavenResolver (
+			//	id: "MAVEN_RESOLVER",
+			//	serverId: "Artifactory-local",
+			//	releaseRepo: "maven-release",
+			//	snapshotRepo: "maven-virtual"
+		//	)
 		}
 	}
 	
-	stage ('Exec Maven') {
-		steps {
-			rtMavenRun (
-				tool: 'apache-maven-3.3.9', // Tool name from Jenkins configuration
-				pom: 'pom.xml',
-				goals: 'clean install',
-				deployerId: "MAVEN_DEPLOYER",
-				resolverId: "MAVEN_RESOLVER"
-			)
-		}
-	}
-	stage ('Publish build info') {
-		steps {
-			rtPublishBuildInfo (
-				serverId: "Artifactory-local"
-			)
-		}
-	}
+	//stage ('Exec Maven') {
+	//	steps {
+	//		rtMavenRun (
+	//			tool: 'apache-maven-3.3.9', // Tool name from Jenkins configuration
+	//			pom: 'pom.xml',
+	//			goals: 'clean install',
+	//			deployerId: "MAVEN_DEPLOYER",
+	//			resolverId: "MAVEN_RESOLVER"
+	//		)
+	//	}
+	//}
+	//stage ('Publish build info') {
+	//	steps {
+	//		rtPublishBuildInfo (
+	//			serverId: "Artifactory-local"
+	//		)
+	//	}
+	//}
 	
 }
